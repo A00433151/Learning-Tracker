@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learning Tracker</title>
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="js/RGraph.common.core.js"></script>
+  <script src="js/RGraph.common.effects.js"></script>
+  <script src="js/RGraph.line.js"></script>
+  <script src="js/RGraph.cornergauge.js"></script>
+  <script src="js/RGraph.hprogress.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+  <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+	<script src="js/script.js" type="text/javascript"></script>
+	<script>
+	    $(document).bind('mobileinit', function () {
+	        $.mobile.pushStateEnabled = false;
+	    });
+	</script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+	<!-- Start of first page -->
+  <div data-role="page" id="pageHome">
+    <div data-role="header">
+      <h1>Learning Tracker</h1>
+    </div>
+    <div data-role="content">
+      Username:
+      <input type="text" id="username">
+      Password :
+      <input type="password" id="passcode">
+
+      <div data-role="controlgroup" id="numKeyPad">
+        <a data-role="button" id="btnEnter" onclick="redirect()">Login</a>
+        <a href="#pageAbout" data-role="button">About</a>
+        <a href="#pageSignup" data-role="button">Sign up?</a>
+      </div>
+      
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addToPass(7)">7</a>
+        <a data-role="button" onclick="addToPass(8)">8</a>
+        <a data-role="button" onclick="addToPass(9)">9</a>
+      </div>
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addToPass(4)">4</a>
+        <a data-role="button" onclick="addToPass(5)">5</a>
+        <a data-role="button" onclick="addToPass(6)">6</a>
+      </div>
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addToPass(1)">1</a>
+        <a data-role="button" onclick="addToPass(2)">2</a>
+        <a data-role="button" onclick="addToPass(3)">3</a>
+      </div>
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addToPass(0)">0</a>
+        <a data-role="button" onclick="addToPass('bksp')" data-icon="delete">del</a>
+      </div>
+    </div>
+    <br>
+    <span></span>
+    <p style="text-align=center;" >To test use, login: admin, password: 0000</p>
+  </div>
+
+  <div data-role="page" id="pageAbout">
+    <div data-role="header">
+      <a href="#pageHome" data-role="button" data-icon="home" data-iconpos="left">Home</a>
+      <h1>Info</h1>
+    </div>
+    <div data-role="content">
+      <h1>Learning Tracker</h1>
+      <h4>Learn, Live, Repeat!!</h4><br>
+      <h4>This is a learning tracking app to track your progressive learning through weeks of training and support.  
+      </h4><br><br><br>
+      <h5><b></b></h5>
+    </div>
+  </div>
+
+  <div data-role="page" id="pageSignup">
+    <div data-role="header">
+      <a href="#pageHome" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+      <h1>Profile</h1>
+    </div>
+    <div data-role="content">
+      <form id="frmSignForm" action="">
+        <div data-role="fieldcontain">
+          <label for="signupFirstName">First Name: </label>
+          <input type="text" placeholder="First Name" name="signupFirstName" data-mini="false" id="signupFirstName" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="signupLastName">Last Name: </label>
+          <input type="text" placeholder="Last Name" name="signupLastName" data-mini="false" id="signupLastName" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+            <label for="dateOfBirth">Date: </label>
+            <input type="date" name="dateOfBirth" data-mini="false" id="dateOfBirth" value="">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="addPassword">Password: </label>
+          <input type="password" placeholder="New Password" name="addPassword" data-mini="false" id="addPassword" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="confirmPassword">Confirm Password: </label>
+          <input type="password" placeholder="Confirm Password" name="confirmPassword" data-mini="false" id="confirmPassword" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="signupEmail">Email: </label>
+          <input type="text" placeholder="Email Address" name="signupEmail" data-mini="false" id="signupEmail" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="signupgenderType" class="select">Gender: </label>
+          <select name="signupgenderType" id="signupgenderType" data-mini="false"
+          data-native-menu="false" required>
+            <option>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <input type="submit" id="buttonuAdd" data-icon="check" data-iconpos="left" value="Sign Up!" data-inline="true" onclick="signupSave()">
+      </form>
+    </div>
+  </div>
+
+   <div data-role="page" id="legalNotice" data-close-btn="none">
+    <div data-role="header" >
+      <h1>Disclamer</h1>
+    </div>
+    <div data-role="content">
+      Provided Information is safe with us. Proceed to agree.
+      <br>
+	  <a id="noticeYes" data-role="button" data-icon ="forward" data-mini ="false" onclick="confirmDisclaimer()">Yes</a>
+	  </div>
+  </div>
+
+  <div data-role="page" id="pageUserInfo">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+
+      <h1>Profile</h1>
+    </div>
+    <div data-role="content">
+      <form id="frmSignForm" action="">
+        <div data-role="fieldcontain">
+          <label for="signupFirstName">First Name: </label>
+          <input type="text" placeholder="First Name" name="signupFirstName" data-mini="false" id="signupFirstName" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="signupLastName">Last Name: </label>
+          <input type="text" placeholder="Last Name" name="signupLastName" data-mini="false" id="signupLastName" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+            <label for="dateOfBirth">Date: </label>
+            <input type="date" name="dateOfBirth" data-mini="false" id="dateOfBirth" value="">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="editPassword">Edit Password: </label>
+          <input type="password" placeholder="Edit Password" name="editPassword" data-mini="false" id="editPassword" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="signupEmail">Email: </label>
+          <input type="text" placeholder="Email Address" name="signupEmail" data-mini="false" id="signupEmail" value="" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="signupgenderType" class="select">Gender: </label>
+          <select name="signupgenderType" id="signupgenderType" data-mini="false"
+          data-native-menu="false" required>
+            <option>Choose Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <input type="submit" id="btnUserUpdate" data-icon="check" data-iconpos="left" value="Update" data-inline="true" onclick="userformSave()">
+      </form>
+    </div>
+  </div>
+
+
+  <div data-role="page" id="pageMenu">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+      <h1>Learning Tracker</h1>
+    </div>
+    <div data-role="content">
+      <div data-role="controlgroup">
+        <a href="#pageUserInfo" data-role="button">Profile</a>
+        <a href="#pageRecords" data-role="button">Records</a>
+        <a href="#pageGraph" data-role="button">Graph</a>
+        <a href="#pageAdvice" data-role="button">Suggestions</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div data-role="page" id="pageRecords">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+      <h1>Records</h1>
+    </div>
+   <div data-role="content">
+      <div data-role="fieldcontain" id="divUserSection">
+        <p>User Profile Details:</p>
+      </div><input type="submit" id="btnUserUpdate" data-icon="check" data-iconpos="left" value="Edit Profile" data-inline="true" data-mini="true" onClick="window.location.href='#pageUserInfo'">
+      <h3 align="center">Learning History</h3>
+      <div data-role="fieldcontain">
+        <table id="tblRecords" class="ui-responsive table-stroke">
+        </table>
+      </div>
+      <div data-role="fieldcontain">
+        <a href="#pageNewRecordForm" id="btnAddRecord" data-role="button" data-icon="plus" onclick="newrecordAdd()">Add New Entry</a>
+        <a href="#" data-role="button" id="btnClearHistory" data-icon="delete" onclick="historyrecordClear()">Clear History</a>
+      </div>
+    </div>
+  </div>
+
+  <div data-role="page" id="pageNewRecordForm">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+    <h1>New Record</h1>
+    </div>
+    <div data-role="content">
+      <form id="frmNewRecordForm" action="">
+        <div data-role="fieldcontain">
+          <div data-role="fieldcontain">
+            <label for="datLearningDate">Date: </label>
+            <input type="date" name="datLearningDate" data-mini="false" id="datLearningDate" value="">
+          </div> 
+         <div data-role="fieldcontain">
+            <label for="txtType"> Learning Type </label>          
+            <input type="text" name="txtType"
+            data-mini="false" id="txtType" value="">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="txtHours">Hours Spend : </label>
+            <input type="number"  placeholder="In Hours" name="txtHours"
+            data-mini="false" id="txtHours" value="">
+          </div>
+        </div>
+        <input type="submit" id="btnSubmitRecord" value="Add Record" onclick="addorEditRecord()">
+        </form>
+    </div>
+  </div>
+
+  <div data-role="page" id="pageGraph" class="test">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+      <h1>Analyze</h1>
+    </div>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Quality Time vs Date</h3>
+      </div>
+      <div class="panel-body">
+        <canvas id="GraphCanvas" width="350" height="500" style="border:1px solid #000000;">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div data-role="page" id="pageAdvice">
+    <div data-role="header">
+        <a href="#pageMenu" data-role="button" data-icon="bars"
+      data-iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info"
+      data-iconpos="right" data-inline="true">Info</a>
+      <h1>Suggestions</h1>
+    </div>
+    <div data-role="content">
+      <canvas id="AdviceCanvas" width="500" height="500" style="border:1px solid #000000;">
+      </canvas>
+    </div>
+  </div>
+
+</body>
+</html>
